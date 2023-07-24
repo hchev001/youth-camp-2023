@@ -73,7 +73,7 @@ const KingOfHillPage = () => {
   );
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24 font-mono bg-slate-600">
+    <div className="flex min-h-screen flex-col items-center justify-between p-4 md:p-24 font-mono bg-slate-600">
       <div className="flex flex-col gap-4">
         {step === 0 && (
           <>

@@ -5,7 +5,7 @@ interface ButtonInterface
   children: React.ReactNode | string;
   onClick?: () => void;
   variant: "success" | "error" | "primary" | "secondary";
-  size?: "small" | "medium" | "large";
+  size?: "xs" | "small" | "medium" | "large";
 }
 
 const Button = ({
@@ -23,6 +23,8 @@ const Button = ({
     size_styles.push("px-2 py-3");
   } else if (size === "large") {
     size_styles.push("px-5 py-6");
+  } else if (size === "xs") {
+    size_styles.push("px-1 py-0.5");
   }
 
   styles = [...size_styles, ...styles];
