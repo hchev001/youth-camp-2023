@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import { shallow } from "zustand/shallow";
 import { useRef } from "react";
 
-interface Team {
+export interface Team {
   name: string;
   time: number;
 }
