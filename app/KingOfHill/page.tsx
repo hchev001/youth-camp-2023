@@ -23,43 +23,30 @@ interface KingOfHillGameState {
   changeTeamName: (index: number, name: string) => void;
 }
 
-const useKingOfHillGameState = create<KingOfHillGameState>()(
-  persist(
-    (set) => ({
-      teams: [],
-      step: 0,
-      setStep: (step: number) => set((state) => ({ step })),
-      addTeam: (team: Team) =>
-        set((state) => ({ teams: [...state.teams, team] })),
-      selectTeam: (index: number) => set(() => ({ activeTeam: index })),
-      setTeamTime: (index: number, time: number) =>
-        set((state) => {
-          console.log("setTeamTime invoked", index, time);
-          const team_ = { ...state.teams[index] };
-          const teams_ = [...state.teams];
-          team_.time += time - team_.time;
-          teams_[index] = team_;
-          return { teams: teams_ };
-        }),
-      changeTeamName: (index: number, name: string) =>
-        set((state) => {
-          const team_ = { ...state.teams[index] };
-          const teams_ = [...state.teams];
-          team_.name = name;
-          teams_[index] = team_;
-          return { teams: teams_ };
-        }),
+const useKingOfHillGameState = create<KingOfHillGameState>()((set) => ({
+  teams: [],
+  step: 0,
+  setStep: (step: number) => set((state) => ({ step })),
+  addTeam: (team: Team) => set((state) => ({ teams: [...state.teams, team] })),
+  selectTeam: (index: number) => set(() => ({ activeTeam: index })),
+  setTeamTime: (index: number, time: number) =>
+    set((state) => {
+      console.log("setTeamTime invoked", index, time);
+      const team_ = { ...state.teams[index] };
+      const teams_ = [...state.teams];
+      team_.time += time - team_.time;
+      teams_[index] = team_;
+      return { teams: teams_ };
     }),
-    {
-      name: "king-of-hill",
-      partialize: (state) => ({
-        teams: state.teams,
-        activeTeam: state.activeTeam,
-        step: state.step,
-      }),
-    }
-  )
-);
+  changeTeamName: (index: number, name: string) =>
+    set((state) => {
+      const team_ = { ...state.teams[index] };
+      const teams_ = [...state.teams];
+      team_.name = name;
+      teams_[index] = team_;
+      return { teams: teams_ };
+    }),
+}));
 
 const KingOfHillPage = () => {
   const currentStopwatch = useRef<any>(null);
